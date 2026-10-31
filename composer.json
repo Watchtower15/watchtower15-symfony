@@ -1,0 +1,25 @@
+{
+    "name": "watchtower15/symfony",
+    "description": "The WatchTower15 PHP SDK's Symfony bundle.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://docs.watchtower15.com",
+    "support": {
+        "source": "https://github.com/watchtower15/watchtower15-symfony",
+        "email": "contact@watchtower15.com"
+    },
+    "require": {
+        "php": "^8.3",
+        "composer-runtime-api": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "WatchTower15\\Symfony\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WatchTower15\\Symfony\\Tests\\": "tests/"
+        }
+    }
+}

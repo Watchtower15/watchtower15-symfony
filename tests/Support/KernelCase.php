@@ -15,9 +15,19 @@ abstract class KernelCase extends TestCase
     /** @var array<string, string|false> */
     private array $savedEnv = [];
 
+    private mixed $exceptionHandlerBefore = null;
+
+    private mixed $errorHandlerBefore = null;
+
     protected function setUp(): void
     {
         TestHttp::reset();
+        // Booting a kernel registers Symfony's error and exception handlers (FrameworkBundle on 6.4 and 7.4), which PHPUnit 12 reports as
+        // risky when a test leaves them: remember the ones in place, and put them back after each test.
+        $this->exceptionHandlerBefore = set_exception_handler(null);
+        restore_exception_handler();
+        $this->errorHandlerBefore = set_error_handler(null);
+        restore_error_handler();
     }
 
     protected function tearDown(): void
@@ -36,6 +46,22 @@ abstract class KernelCase extends TestCase
             }
         }
         $this->savedEnv = [];
+        for ($i = 0; $i < 20; ++$i) {
+            $current = set_exception_handler(null);
+            restore_exception_handler();
+            if ($current === $this->exceptionHandlerBefore) {
+                break;
+            }
+            restore_exception_handler();
+        }
+        for ($i = 0; $i < 20; ++$i) {
+            $current = set_error_handler(null);
+            restore_error_handler();
+            if ($current === $this->errorHandlerBefore) {
+                break;
+            }
+            restore_error_handler();
+        }
     }
 
     /**

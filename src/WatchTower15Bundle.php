@@ -23,11 +23,13 @@ final class WatchTower15Bundle extends AbstractBundle
 
     public function configure(DefinitionConfigurator $definition): void
     {
+        // `variableNode` for the keys that may come from `%env()%`: a scalar node refuses `%env(default::NAME)%` on Symfony 6.4 and 7.4, whose
+        // `default` processor provides `array` among its types. The literal keys are scalar nodes, checked in loadExtension().
         $definition->rootNode()
             ->children()
-                ->scalarNode('api_key')->defaultNull()->end()
-                ->scalarNode('api_url')->defaultNull()->end()
-                ->scalarNode('ingest_url')->defaultNull()->end()
+                ->variableNode('api_key')->defaultNull()->end()
+                ->variableNode('api_url')->defaultNull()->end()
+                ->variableNode('ingest_url')->defaultNull()->end()
                 ->scalarNode('timeout')->defaultNull()->end()
                 ->scalarNode('connect_timeout')->defaultNull()->end()
                 ->scalarNode('max_retries')->defaultNull()->end()
@@ -36,10 +38,10 @@ final class WatchTower15Bundle extends AbstractBundle
                 ->arrayNode('metrics')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('token')->defaultNull()->end()
-                        ->scalarNode('enabled')->defaultValue(true)->end()
-                        ->scalarNode('store')->defaultNull()->end()
-                        ->scalarNode('prefix')->defaultNull()->end()
+                        ->variableNode('token')->defaultNull()->end()
+                        ->variableNode('enabled')->defaultValue(true)->end()
+                        ->variableNode('store')->defaultNull()->end()
+                        ->variableNode('prefix')->defaultNull()->end()
                         ->arrayNode('allowed')->normalizeKeys(false)->useAttributeAsKey('metric')->scalarPrototype()->end()->end()
                         ->scalarNode('allow_any')->defaultValue(false)->end()
                         ->scalarNode('heartbeat')->defaultNull()->end()
@@ -50,7 +52,7 @@ final class WatchTower15Bundle extends AbstractBundle
                 ->arrayNode('logs')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('token')->defaultNull()->end()
+                        ->variableNode('token')->defaultNull()->end()
                     ->end()
                 ->end()
             ->end();

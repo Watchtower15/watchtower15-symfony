@@ -33,6 +33,9 @@ final class SymfonyTransport implements Transport
         $cap = $options->maxResponseBytes;
         $tooLarge = false;
         $failure = null;
+        $status = 0;
+        $headers = [];
+        $content = '';
         try {
             $response = $this->client->request($request->getMethod(), (string) $request->getUri(), [
                 'headers' => self::headersOf($request),

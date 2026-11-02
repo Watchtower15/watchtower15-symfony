@@ -1,7 +1,7 @@
 {
     "name": "watchtower15/symfony",
     "description": "The WatchTower15 PHP SDK's Symfony bundle.",
-    "type": "library",
+    "type": "symfony-bundle",
     "license": "MIT",
     "homepage": "https://docs.watchtower15.com",
     "support": {
@@ -10,7 +10,22 @@
     },
     "require": {
         "php": "^8.3",
-        "composer-runtime-api": "^2.2"
+        "composer-runtime-api": "^2.2",
+        "watchtower15/sdk": "self.version",
+        "symfony/config": "^6.4 || ^7.4 || ^8.0",
+        "symfony/console": "^6.4 || ^7.4 || ^8.0",
+        "symfony/dependency-injection": "^6.4 || ^7.4 || ^8.0",
+        "symfony/event-dispatcher": "^6.4 || ^7.4 || ^8.0",
+        "symfony/framework-bundle": "^6.4 || ^7.4 || ^8.0",
+        "symfony/http-client": "^6.4 || ^7.4 || ^8.0",
+        "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0"
+    },
+    "suggest": {
+        "symfony/monolog-bundle": "The watchtower15.monolog_handler service, with Monolog 3 (^3.10 || ^4.0)",
+        "symfony/scheduler": "Flushes the metrics every minute with messenger:consume scheduler_watchtower15",
+        "ext-redis": "A redis:// metrics store through phpredis 6.3 or later",
+        "predis/predis": "A redis:// metrics store through Predis (^2.2 || ^3.0)",
+        "ext-apcu": "An apcu:// metrics store, flushed from requests"
     },
     "autoload": {
         "psr-4": {

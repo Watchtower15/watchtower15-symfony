@@ -9,6 +9,8 @@ Nothing is built, sent or logged when the kernel boots, and a mistyped credentia
 This repository is a read-only split of the WatchTower15 PHP SDK: pull requests are not accepted. Documentation:
 https://docs.watchtower15.com. Report a vulnerability to contact@watchtower15.com with the subject "Security".
 
+**Support policy.** PHP 8.3 and later and Symfony 6.4, 7.4 and 8.x (8.x on PHP 8.4 and later), Semantic Versioning, all four packages released together: see the [support policy](https://github.com/watchtower15/watchtower15-php#support-policy).
+
 ## Install
 
 ```
